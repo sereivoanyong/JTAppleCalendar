@@ -143,6 +143,10 @@ class JTACMonthLayout: UICollectionViewLayout, JTACMonthLayoutProtocol {
             executeDelayedTasks()
             return
         }
+
+        if collectionView!.bounds.width == 0 || collectionView!.bounds.height == 0 {
+            return
+        }
         
         setupDataFromDelegate()
         
