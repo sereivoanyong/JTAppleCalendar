@@ -106,6 +106,13 @@ class JTACMonthLayout: UICollectionViewLayout, JTACMonthLayoutProtocol {
         return CGSize(width: width, height: height)
     }
     
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        if let collectionView = collectionView {
+            return collectionView.bounds.size != newBounds.size
+        }
+        return super.shouldInvalidateLayout(forBoundsChange: newBounds)
+    }
+    
     open override func register(_ nib: UINib?, forDecorationViewOfKind elementKind: String) {
         super.register(nib, forDecorationViewOfKind: elementKind)
         thereAreDecorationViews = true
@@ -585,4 +592,12 @@ class JTACMonthLayout: UICollectionViewLayout, JTACMonthLayoutProtocol {
         xStride = 0
         firstContentOffsetWasSet = false
     }
+}
+
+extension FloatingPoint {
+
+  @inlinable
+  func floored(by value: Self) -> Self {
+    return ceil(self * value) / value
+  }
 }
